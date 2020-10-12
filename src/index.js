@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+// Import styles
+import './styles/styles.css';
+
+// Import components
+import App from './components/App';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App theme="dark" />
   </React.StrictMode>,
   document.getElementById('root')
 );

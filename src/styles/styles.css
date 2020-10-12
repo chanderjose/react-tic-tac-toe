@@ -1,0 +1,489 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url(../fonts/icomoon.eot);
+    src:  url(../fonts/icomoon.eot#iefix) format('embedded-opentype'),
+      url(../fonts/icomoon.ttf) format('truetype'),
+      url(../fonts/icomoon.woff) format('woff'),
+      url(../fonts/icomoon.svg#icomoon) format('svg');
+
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif;
+
+    line-height: 1.5;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+::-moz-focus-inner {
+    border: 0;
+}
+
+/*---------- Begin utility classes ------------*/
+.text-center {
+    text-align: center;
+}
+
+.btn {
+    font-weight: 700;
+    padding: 1rem 3rem;
+    border: 0;
+    border-radius: 4px;
+    font-size: 2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
+.btn.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.btn-blue {
+    background-color: #4299e1;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.btn-blue:not(.disabled):hover {
+    background-color: #2b6cb0;
+    transform: scale(1);
+    /* font-size: 2.5rem; */
+}
+
+.btn.active {
+    animation: pulse-animation 1s ease;
+    animation-iteration-count: 1;
+}
+
+@keyframes pulse-animation {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+@keyframes pulse-font-animation {
+    0% {
+        font-size: 3rem;
+    }
+    50% {
+        font-size: 3.5rem;
+    }
+    100% {
+        font-size: 3rem;
+    }
+}
+/*---------- End utility classes ------------*/
+
+/*---------- Begin component classes ------------*/
+:root {
+    --white: #fff;
+    --black: #000;
+
+    --backgroundColor: #1f2029;
+    --textPrimaryColor: #fff;
+    --textSecondaryColor: #fff;
+    --lightColor: #353746;
+    --lightColorShade1: #353746;
+
+    --startGradient: #f8ab37;
+    --endGradient: #da2c4d;
+}
+
+.App[data-theme="light"] {
+    --backgroundColor: #ffffff;
+    --textPrimaryColor: #1f2029;
+    --textSecondaryColor: #1f2029;
+    --lightColor: #e6e6e6;
+    --lightColorShade1: #353746;
+}
+
+.App {
+    height: 100%;
+    background-color: var(--backgroundColor);
+    color: var(--textPrimaryColor);
+
+    transition: all 300ms ease;
+    min-height: 100vh;
+}
+
+.Header {
+    text-align: center;
+    padding-bottom: 3rem;
+}
+
+.Header h1 {
+    font-size: 3rem;
+    color: var(--textPrimaryColor);
+}
+
+.Header h2 {
+    font-size: 2rem;
+    color: var(--textSecondaryColor);
+    opacity: 0.9;
+}
+
+.Menu {
+    max-width: 600px;
+    padding: 2rem 0 4rem 0;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Menu input[type="radio"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: fixed;
+}
+
+.Menu input[type="radio"] + label {
+    display: inline-block;
+    padding: 2rem 4.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    opacity: 0.9;
+    transition: all 0.3s ease;
+
+}
+
+.Menu input[type="radio"]:not(:checked) + label {
+    background-color: var(--lightColor);
+}
+
+.Menu input[type="radio"]:not(:checked) + label:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2)
+}
+
+.Menu input[type="radio"]:checked + label {
+    opacity: 1;
+    transform: scale(1.1);
+    background-image: linear-gradient(to right, var(--startGradient), var(--endGradient));
+}
+
+.Menu input[type="radio"] + label:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Menu input[type="radio"] + label > span {
+    display: block;
+    font-size: 1rem;
+    padding-top: 1rem;
+    z-index: 3;
+}
+
+.Game {
+    width: 100%;
+
+    display: flex;
+}
+
+.Board {
+    flex: 1 1;
+}
+
+.Results {
+    flex: 1 1;
+    padding: 10px;
+}
+
+.Results .ResultsContainer {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.Results .ResultsContainer .result {
+    flex: 1;
+}
+
+.Results .label {
+    font-size: 1.5rem;
+    display: block;
+    text-align: center;
+}
+
+.Results .value {
+    font-size: 3rem;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+}
+
+.Results .ButtonsContainer {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.Grid {
+    width: 50vh;
+    height: 50vh;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    margin: 0 auto;
+}
+
+.Cell {
+    border: 5px solid var(--textPrimaryColor);
+    font-size: 3rem;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 300ms ease;
+}
+
+.Cell:not(.Active) {
+    pointer-events: none;
+}
+
+.Cell.Active:hover {
+    background-color: var(--lightColor);
+    cursor: pointer;
+}
+
+.CellX {
+    width: 100%;
+    height: 100%;
+}
+
+.CellX::before,
+.CellX::after {
+    content: '';
+    height: 8px;
+    width: 100%;
+    background: var(--textPrimaryColor);
+    display: block;
+    position: absolute;
+    border-radius: 4px;
+}
+
+.CellX::before {
+    transform: rotate(45deg);
+}
+
+.CellX::after {
+    transform: rotate(-45deg);
+}
+
+.CellO {
+    width: 100%;
+    height: 100%;
+}
+
+.CellO::before {
+    content: '';
+    height: 70%;
+    width: 70%;
+    border: 8px solid var(--textPrimaryColor);
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+}
+
+
+
+
+
+
+.Cell span {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Cell.Winner span {
+    color: var(--startGradient);
+    animation: pulse-animation 1s infinite ease;
+    border: 4px solid var(--endGradient) !important;
+}
+
+.Cell:nth-child(1) {
+    border-color: transparent;
+}
+
+.Cell:nth-child(2) {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+
+    border-block-start-style: dotted;
+    border-block-end-style: dotted;
+}
+
+.Cell:nth-child(3) {
+    border-color: transparent;
+}
+
+.Cell:nth-child(4) {
+    border-left-color: transparent;
+    border-right-color: transparent;
+
+    border-left-style: dotted;
+    border-right-style: dotted;
+}
+
+.Cell:nth-child(6) {
+    border-left-color: transparent;
+    border-right-color: transparent;
+
+    border-left-style: dotted;
+    border-right-style: dotted;
+}
+
+.Cell:nth-child(7) {
+    border-color: transparent;
+}
+
+.Cell:nth-child(8) {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+
+    border-block-start-width: 0;
+    border-block-end-width: 0;
+}
+
+.Cell:nth-child(9) {
+    border-color: transparent;
+}
+
+.ThemeSelector {
+    position: absolute;
+    padding: 20px 0;
+    margin: 1rem;
+    right: 0;
+}
+
+.ThemeSelector input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.ThemeSelector label {
+    display: block;
+    background-color: var(--endGradient);
+    height: 8px;
+    width: 65px;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    margin: auto;
+    font-family: 'icomoon';
+}
+
+.ThemeSelector label::before {
+    position: absolute;
+    display: block;
+    content: '';
+    top: -12px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    color: var(--backgroundColor);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.15), 0 0 0 1px rgba(26,53,71,0.07);/*TODO: Change it*/
+
+    transition: all 300ms ease;
+}
+
+.ThemeSelector input:not(:checked) + label::before {
+    left: 0;
+    background-color: #353746;
+    content: '\e9d4';
+}
+
+.ThemeSelector input:checked + label::before {
+    left: 35px;
+    background-color: #fff;
+    content: '\e9d5';
+}
+/*---------- End component classes ------------*/
+
+/*---------- Begin Responsive ------------*/
+@media all and (max-width: 700px) {
+    .Header {
+        padding-bottom: 2rem;
+    }
+
+    .Menu {
+        max-width: 300px;
+        padding: 1rem 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Menu input[type="radio"] + label {
+        margin-bottom: 20px;
+    }
+
+    .Game {
+        flex-direction: column;
+    }
+
+    .Results {
+        padding-top: 2rem;
+    }
+
+    .Grid {
+        width: 30vh;
+        height: 30vh;
+        min-width: 200px;
+        min-height: 200px;
+    }
+
+    .Results {
+        display: grid;
+        grid-template-rows: auto auto auto;
+    }
+    .Results div:first {
+        grid-row: 2;
+    }
+    .Results .ResultsContainer {
+        grid-row: 3;
+    }
+    .Results .ButtonsContainer {
+        grid-row: 1;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .ThemeSelector {
+        position: relative;
+        margin: 0;
+    }
+}
+/*---------- End Responsive ------------*/
